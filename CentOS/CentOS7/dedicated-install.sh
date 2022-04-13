@@ -6,7 +6,7 @@
 
 LINE = "-------------------------------------------------"
 # Argument 1: Message, Argument 2: Description (if any)
-function DISPLAY_MESSAGE(){
+function DISPLAY_MESSAGE () {
   echo $LINE
   echo $1
   if [[$2 != ""]] then
