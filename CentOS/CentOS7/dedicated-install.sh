@@ -5,15 +5,18 @@
 # To Do: Dump all log like service status to a log file
 
 LINE="-------------------------------------------------"
-# Argument 1: Message, Argument 2: Description (if any)
+# Argument 1: Message 1, Argument 2: Message 2, Argument 3: Message 3
 function DISPLAY_MESSAGE () {
   echo $LINE
   echo $1
-  if [[$2 != ""]]; then
-    echo $2
-  fi
+  [ -n $2 ] && echo $2
+  [ -n $3 ] && echo $3
   echo $LINE
 }
+
+DISPLAY_MESSAGE "1"
+DISPLAY_MESSAGE "1" "2"
+DISPLAY_MESSAGE "1" "2" "3"
 
 # Update packages
 DISPLAY_MESSAGE "Updating packages"
