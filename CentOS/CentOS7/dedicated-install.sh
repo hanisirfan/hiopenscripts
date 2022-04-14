@@ -8,9 +8,18 @@ LINE="-------------------------------------------------"
 # Argument 1: Message 1, Argument 2: Message 2, Argument 3: Message 3
 function DISPLAY_MESSAGE () {
   echo $LINE
-  echo $1
-  [ -n $2 ] && echo $2
-  [ -n $3 ] && echo $3
+  if [[-n $1] -a [-n $2] -a [-n $3]]; then
+    echo $1
+    echo $2
+    echo $3
+  elif [[-n $1] -a [-n $2]]; then
+    echo $1
+    echo $2
+  elif [[-n $1]]; then
+    echo $1
+  else
+    echo "No argument passed."
+  fi
   echo $LINE
 }
 
@@ -69,9 +78,9 @@ DISPLAY_MESSAGE "SSH Port Change"
 
 echo "Options: (yes/y) or (no/n)"
 read -p "Did you want to change the SSH port?: " RESP
-if [["$RESP" = "y"] -o ["$RESP" = "yes"]]; then
+if [[$RESP = "y"] -o [$RESP = "yes"]]; then
   CHANGE_SSH_PORT
-elif [["$RESP" = "n"] -o ["$RESP" = "no"]]; then
+elif [[$RESP = "n"] -o [$RESP = "no"]]; then
   echo "Skipping SSH port change."
 else
   echo "Skipping SSH port change."
