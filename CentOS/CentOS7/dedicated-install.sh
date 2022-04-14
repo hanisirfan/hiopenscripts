@@ -4,7 +4,7 @@
 
 # To Do: Dump all log like service status to a log file
 
-LINE = "-------------------------------------------------"
+LINE="-------------------------------------------------"
 # Argument 1: Message, Argument 2: Description (if any)
 function DISPLAY_MESSAGE () {
   echo $LINE
@@ -51,9 +51,9 @@ DISPLAY_MESSAGE "Firewall Daemon disabled successfully!"
 # Change SSH Port
 function CHANGE_SSH_PORT () {
   read -p "Port Number: " PORT
-  SSH_CONFIG_FILE = "/etc/ssh/sshd_config"
-  SSH_PORT_CONFIG_STRING = "#Port 22"
-  SSH_NEW_PORT_STRING = "Port ${PORT}"
+  SSH_CONFIG_FILE="/etc/ssh/sshd_config"
+  SSH_PORT_CONFIG_STRING="#Port 22"
+  SSH_NEW_PORT_STRING="Port ${PORT}"
   if [[$PORT != ""]] then
     # sed -i "s/CONFIG_STRING/NEW_PORT" $CONFIG_FILE
     sed -i "s/$SSH_PORT_CONFIG_STRING/$SSH_NEW_PORT_STRING/" $SSH_CONFIG_FILE
