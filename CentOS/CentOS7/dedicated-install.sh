@@ -9,7 +9,7 @@ LINE="-------------------------------------------------"
 function DISPLAY_MESSAGE () {
   echo $LINE
   echo $1
-  if [[$2 != ""]] then
+  if [[$2 != ""]]; then
     echo $2
   fi
   echo $LINE
@@ -54,7 +54,7 @@ function CHANGE_SSH_PORT () {
   SSH_CONFIG_FILE="/etc/ssh/sshd_config"
   SSH_PORT_CONFIG_STRING="#Port 22"
   SSH_NEW_PORT_STRING="Port ${PORT}"
-  if [[$PORT != ""]] then
+  if [[$PORT != ""]]; then
     # sed -i "s/CONFIG_STRING/NEW_PORT" $CONFIG_FILE
     sed -i "s/$SSH_PORT_CONFIG_STRING/$SSH_NEW_PORT_STRING/" $SSH_CONFIG_FILE
   else
@@ -66,9 +66,9 @@ DISPLAY_MESSAGE "SSH Port Change"
 
 echo "Options: (yes/y) or (no/n)"
 read -p "Did you want to change the SSH port?: " RESP
-if [["$RESP" = "y"] -o ["$RESP" = "yes"]] then
+if [["$RESP" = "y"] -o ["$RESP" = "yes"]]; then
   CHANGE_SSH_PORT
-elif [["$RESP" = "n"] -o ["$RESP" = "no"]] then
+elif [["$RESP" = "n"] -o ["$RESP" = "no"]]; then
   echo "Skipping SSH port change."
 else
   echo "Skipping SSH port change."
