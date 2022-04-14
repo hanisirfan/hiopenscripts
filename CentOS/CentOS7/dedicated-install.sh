@@ -8,14 +8,14 @@ LINE="-------------------------------------------------"
 # Argument 1: Message 1, Argument 2: Message 2, Argument 3: Message 3
 function DISPLAY_MESSAGE () {
   echo $LINE
-  if [[-n $1] -a [-n $2] -a [-n $3]]; then
+  if [ [-n $1] -a [-n $2] -a [-n $3] ]; then
     echo $1
     echo $2
     echo $3
-  elif [[-n $1] -a [-n $2]]; then
+  elif [ [-n $1] -a [-n $2] ]; then
     echo $1
     echo $2
-  elif [[-n $1]]; then
+  elif [ [-n $1] ]; then
     echo $1
   else
     echo "No argument passed."
