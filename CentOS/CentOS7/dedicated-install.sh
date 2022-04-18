@@ -8,21 +8,20 @@ LINE="-------------------------------------------------"
 # Argument 1: Message 1, Argument 2: Message 2, Argument 3: Message 3
 function DISPLAY_MESSAGE () {
   echo $LINE
-  if [ [-n $1] -a [-n $2] -a [-n $3] ]; then
-    echo $1
-    echo $2
-    echo $3
-  elif [ [-n $1] -a [-n $2] ]; then
-    echo $1
-    echo $2
-  elif [ [-n $1] ]; then
-    echo $1
-  else
-    echo "No argument passed."
+  if [[ -n "$1" ]]
+    then
+        echo $1
+  fi
+  if [[ -n "$2" ]]
+    then
+        echo $2
+  fi
+  if [[ -n "$3" ]]
+    then
+        echo $3
   fi
   echo $LINE
 }
-
 DISPLAY_MESSAGE "1"
 DISPLAY_MESSAGE "1" "2"
 DISPLAY_MESSAGE "1" "2" "3"
@@ -49,7 +48,7 @@ yum -y install wget screen
 DISPLAY_MESSAGE "Screen installation completed!"
 
 # Install networking tools
-DISPLAY_MESSAGE "Installing networking tools"
+DISPLAY_MESSAGE "Installing monitoring and networking tools"
 yum -y install iftop iotop atop htop
 yum -y install net-tools
 DISPLAY_MESSAGE "Networking tools installation completed!"
