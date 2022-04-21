@@ -3,7 +3,7 @@
 # Script By: Muhammad Hanis Irfan Bin Mohd
 
 CURRENT_DATE () {
-    echo `date +%Y-%m-%d.%H:%M:%S
+    echo `date +%Y-%m-%d.%H:%M:%S`
 }
 
 ADD_TO_LOG () {
