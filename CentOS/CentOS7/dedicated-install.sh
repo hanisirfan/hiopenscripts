@@ -74,7 +74,8 @@ CHANGE_SSH_PORT () {
   fi
 }
 
-read -p "Did you want to change the SSH port? (y/n): " yn
+echo "Did you want to change the SSH port? (y/n):" > /dev/tty
+read -p yn < /dev/tty
     case $yn in
         [Yy]* ) CHANGE_SSH_PORT; break;;
         [Nn]* ) echo "Skipping SSH port change."; exit;;
