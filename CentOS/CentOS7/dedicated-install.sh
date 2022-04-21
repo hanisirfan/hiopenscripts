@@ -74,14 +74,12 @@ CHANGE_SSH_PORT () {
   fi
 }
 
-read -p "Did you want to change the SSH port? (yes/y) or (no/n): " RESP
-if [[ "$RESP" = "y" ]] || [[ "$RESP" = "yes" ]]; then
-  CHANGE_SSH_PORT
-elif [[ "$RESP" = "n" ]] || [[ "$RESP" = "no" ]]; then
-  echo "Skipping SSH port change."
-else
-  echo "Skipping SSH port change."
-fi
+read -p "Did you want to change the SSH port? (y/n): " yn
+    case $yn in
+        [Yy]* ) CHANGE_SSH_PORT; break;;
+        [Nn]* ) echo "Skipping SSH port change."; exit;;
+        * ) echo "Please answer yes or no (y/n).";;
+    esac
 
 # Disable SELinux
 # Same method as SSH port change
