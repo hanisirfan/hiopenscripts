@@ -22,9 +22,6 @@ DISPLAY_MESSAGE () {
   fi
   echo $LINE
 }
-DISPLAY_MESSAGE "1"
-DISPLAY_MESSAGE "1" "2"
-DISPLAY_MESSAGE "1" "2" "3"
 
 # Update packages
 DISPLAY_MESSAGE "Updating packages"
@@ -68,7 +65,7 @@ CHANGE_SSH_PORT () {
   SSH_PORT_CONFIG_STRING="#Port 22"
   SSH_NEW_PORT_STRING="Port ${PORT}"
 
-  if [[ -n "$PORT" ] && [ "$PORT" -ge 0 ] && [ "$PORT" -le 65535 ]] ; then
+  if [[ -n "$PORT" ]] && [[ "$PORT" -ge 0 ]] && [[ "$PORT" -le 65535 ]] ; then
     # sed -i "s/CONFIG_STRING/NEW_PORT" $CONFIG_FILE
     sed -i "s/$SSH_PORT_CONFIG_STRING/$SSH_NEW_PORT_STRING/" $SSH_CONFIG_FILE
   else
@@ -78,9 +75,9 @@ CHANGE_SSH_PORT () {
 }
 
 read -p "Did you want to change the SSH port? (yes/y) or (no/n): " RESP
-if [["$RESP" = "y"] -o ["$RESP" = "yes"]]; then
+if [[ "$RESP" = "y" ]] || [[ "$RESP" = "yes" ]]; then
   CHANGE_SSH_PORT
-elif [["$RESP" = "n"] -o ["$RESP" = "no"]]; then
+elif [[ "$RESP" = "n" ]] || [[ "$RESP" = "no" ]]; then
   echo "Skipping SSH port change."
 else
   echo "Skipping SSH port change."
