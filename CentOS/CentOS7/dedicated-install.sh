@@ -6,7 +6,7 @@
 
 LINE="-------------------------------------------------"
 # Argument 1: Message 1, Argument 2: Message 2, Argument 3: Message 3
-function DISPLAY_MESSAGE () {
+DISPLAY_MESSAGE () {
   echo $LINE
   if [[ -n "$1" ]]
     then
@@ -59,27 +59,28 @@ systemctl disable firewalld
 systemctl stop firewalld
 DISPLAY_MESSAGE "Firewall Daemon disabled successfully!"
 
+DISPLAY_MESSAGE "SSH Port Change"
+
 # Change SSH Port
-function CHANGE_SSH_PORT () {
-  read -p "Port Number: " PORT
+CHANGE_SSH_PORT () {
+  read -p "Port Number (0 - 65535): " PORT
   SSH_CONFIG_FILE="/etc/ssh/sshd_config"
   SSH_PORT_CONFIG_STRING="#Port 22"
   SSH_NEW_PORT_STRING="Port ${PORT}"
-  if [[$PORT != ""]]; then
+
+  if [[ -n "$PORT" ] && [ "$PORT" -ge 0 ] && [ "$PORT" -le 65535 ]] ; then
     # sed -i "s/CONFIG_STRING/NEW_PORT" $CONFIG_FILE
     sed -i "s/$SSH_PORT_CONFIG_STRING/$SSH_NEW_PORT_STRING/" $SSH_CONFIG_FILE
   else
+    echo "Unknow input given! Please retry.."
     CHANGE_SSH_PORT
   fi
 }
 
-DISPLAY_MESSAGE "SSH Port Change"
-
-echo "Options: (yes/y) or (no/n)"
-read -p "Did you want to change the SSH port?: " RESP
-if [[$RESP = "y"] -o [$RESP = "yes"]]; then
+read -p "Did you want to change the SSH port? (yes/y) or (no/n): " RESP
+if [["$RESP" = "y"] -o ["$RESP" = "yes"]]; then
   CHANGE_SSH_PORT
-elif [[$RESP = "n"] -o [$RESP = "no"]]; then
+elif [["$RESP" = "n"] -o ["$RESP" = "no"]]; then
   echo "Skipping SSH port change."
 else
   echo "Skipping SSH port change."
