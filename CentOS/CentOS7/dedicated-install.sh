@@ -37,7 +37,7 @@ echo "USER id = "`whoami`
 echo "IP ADDRESS = "`ip a s enp0s3 | grep "inet " | cut -f6 -d" "`
 
 # Update packages
-DISPLAY_MESSAGE "Updating packages"
+DISPLAY_MESSAGE "Updating Packages"
 yum -y update
 DISPLAY_MESSAGE "Packages update completed!"
 
@@ -58,10 +58,10 @@ yum -y install wget screen
 DISPLAY_MESSAGE "Screen installation completed!"
 
 # Install networking tools
-DISPLAY_MESSAGE "Installing monitoring and networking tools"
+DISPLAY_MESSAGE "Installing Monitoring And Networking Tools"
 yum -y install iftop iotop atop htop
 yum -y install net-tools
-DISPLAY_MESSAGE "Networking tools installation completed!"
+DISPLAY_MESSAGE "Monitoring and networking tools installation completed!"
 
 # Disable and stop firewall daemon
 DISPLAY_MESSAGE "Disabling Firewall Daemon"
@@ -82,6 +82,7 @@ CHANGE_SSH_PORT () {
   if [[ -n "$PORT" ]] && [[ "$PORT" -ge 0 ]] && [[ "$PORT" -le 65535 ]] ; then
     # sed -i "s/CONFIG_STRING/NEW_PORT" $CONFIG_FILE
     sed -i "s/$SSH_PORT_CONFIG_STRING/$SSH_NEW_PORT_STRING/" $SSH_CONFIG_FILE
+    DISPLAY_MESSAGE "SSH port changed successfully!"
   else
     echo "Unknow input given! Please retry.."
     CHANGE_SSH_PORT
@@ -100,7 +101,16 @@ ASK_CHANGE_SSH_PORT () {
 ASK_CHANGE_SSH_PORT
 
 # Disable SELinux
-# Same method as SSH port change
+DISPLAY_MESSAGE "Disabling SELinux"
+
+SELINUX_CONFIG_FILE="/etc/selinux/config"
+SELINUX_CONFIG_STRING="SELINUX=enforcing"
+SELINUX_NEW_STRING="SELINUX=disabled"
+
+sed -i "s/$SELINUX_CONFIG_STRING/$SELINUX_NEW_STRING/" $SELINUX_CONFIG_FILE
+
+DISPLAY_MESSAGE "SELinux disabled successfully!"
+
 #nano /etc/selinux/config (disabled)
 
 # Disable and remove Network Manager
