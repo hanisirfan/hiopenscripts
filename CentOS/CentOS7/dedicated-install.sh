@@ -7,6 +7,10 @@
 LINE="-------------------------------------------------"
 # Argument 1: Message 1, Argument 2: Message 2, Argument 3: Message 3
 DISPLAY_MESSAGE () {
+  echo
+  echo
+  echo
+  echo
   echo $LINE
   if [[ -n "$1" ]]
     then
@@ -21,7 +25,16 @@ DISPLAY_MESSAGE () {
         echo $3
   fi
   echo $LINE
+  echo
+  echo
+  echo
+  echo
 }
+
+echo "CURRENT TIME = "`date`
+echo "HOSTNAME = "`hostname`
+echo "USER id = "`whoami`
+echo "IP ADDRESS = "`ip a s enp0s3 | grep "inet " | cut -f6 -d" "`
 
 # Update packages
 DISPLAY_MESSAGE "Updating packages"
@@ -60,7 +73,9 @@ DISPLAY_MESSAGE "SSH Port Change"
 
 # Change SSH Port
 CHANGE_SSH_PORT () {
-  read -p "Port Number (0 - 65535): " PORT
+  echo "Port Number (0 - 65535): " > /dev/tty
+  read -p PORT < /dev/tty
+
   SSH_CONFIG_FILE="/etc/ssh/sshd_config"
   SSH_PORT_CONFIG_STRING="#Port 22"
   SSH_NEW_PORT_STRING="Port ${PORT}"
@@ -74,13 +89,16 @@ CHANGE_SSH_PORT () {
   fi
 }
 
-echo "Did you want to change the SSH port? (y/n):" > /dev/tty
-read -p yn < /dev/tty
+ASK_CHANGE_SSH_PORT () {
+  read -r -p "Did you want to change the SSH port? (y/n): " yn
     case $yn in
         [Yy]* ) CHANGE_SSH_PORT; break;;
         [Nn]* ) echo "Skipping SSH port change."; exit;;
-        * ) echo "Please answer yes or no (y/n).";;
+        * ) echo "Unknown input!."; ASK_CHANGE_SSH_PORT;;
     esac
+}
+
+ASK_CHANGE_SSH_PORT
 
 # Disable SELinux
 # Same method as SSH port change
