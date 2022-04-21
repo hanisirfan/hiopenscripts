@@ -7,8 +7,9 @@ CURRENT_DATE () {
 }
 
 ADD_TO_LOG () {
+  local $CURRENT_DATE=$(CURRENT_DATE)
   echo >> /var/log/dedicated-install
-  echo CURRENT_DATE+="${1}" >> /var/log/dedicated-install
+  echo "${CURRENT_DATE} ${1}" >> /var/log/dedicated-install
   echo >> /var/log/dedicated-install
 }
 
