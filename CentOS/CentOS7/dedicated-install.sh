@@ -73,8 +73,7 @@ DISPLAY_MESSAGE "SSH Port Change"
 
 # Change SSH Port
 CHANGE_SSH_PORT () {
-  echo "Port Number (0 - 65535): " > /dev/tty
-  read -p PORT < /dev/tty
+  read -r -p "Port Number (0 - 65535): " PORT
 
   SSH_CONFIG_FILE="/etc/ssh/sshd_config"
   SSH_PORT_CONFIG_STRING="#Port 22"
