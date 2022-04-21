@@ -93,7 +93,7 @@ ASK_CHANGE_SSH_PORT () {
   read -r -p "Did you want to change the SSH port? (y/n): " yn
     case $yn in
         [Yy]* ) CHANGE_SSH_PORT; break;;
-        [Nn]* ) echo "Skipping SSH port change."; exit;;
+        [Nn]* ) echo "Skipping SSH port change.";;
         * ) echo "Unknown input!."; ASK_CHANGE_SSH_PORT;;
     esac
 }
@@ -111,18 +111,25 @@ sed -i "s/$SELINUX_CONFIG_STRING/$SELINUX_NEW_STRING/" $SELINUX_CONFIG_FILE
 
 DISPLAY_MESSAGE "SELinux disabled successfully!"
 
-#nano /etc/selinux/config (disabled)
-
 # Disable and remove Network Manager
-# systemctl status NetworkManager
-# systemctl disable NetworkManager
-# systemctl status NetworkManager
-# yum remove NetworkManager
+DISPLAY_MESSAGE "Disabling And Removing NetworkManager"
+
+systemctl status NetworkManager
+systemctl disable NetworkManager
+systemctl status NetworkManager
+yum remove NetworkManager
+
+DISPLAY_MESSAGE "NetworkManager disabled and removed successfully!"
+
+DISPLAY_MESSAGE "SELinux disabled successfully!"
+
+DISPLAY_MESSAGE "Please run sestatus command after this server reboots to check whether SELinux is still enforced."
 
 # Reboot the server in 10 seconds.
-# Reboot message
-# shutdown -r now
+DISPLAY_MESSAGE "Rebooting the server in 10 seconds!"
 
-# Ask the engineer to run sestatus command to check its status.
+# Delays 10 seconds
+sleep 10
+shutdown -r now
+
 # Dump port number etc in the same log file.
-# sestatus (check selinux status)
