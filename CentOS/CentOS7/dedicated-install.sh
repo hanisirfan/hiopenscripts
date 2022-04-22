@@ -7,7 +7,7 @@ CURRENT_DATE () {
 }
 
 ADD_TO_LOG () {
-  echo "[$(date +%y/%m/%d_%H:%M:%S) ${1}]" >> /var/log/dedicated-install
+  echo "[$(date +%y/%m/%d_%H:%M:%S)] ${1}" >> /var/log/dedicated-install
 }
 
 LINE="-------------------------------------------------"
