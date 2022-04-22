@@ -7,9 +7,7 @@ CURRENT_DATE () {
 }
 
 ADD_TO_LOG () {
-  echo >> /var/log/dedicated-install
-  echo "$(date +%y/%m/%d_%H:%M:%S) ${1}" >> /var/log/dedicated-install
-  echo >> /var/log/dedicated-install
+  echo "[$(date +%y/%m/%d_%H:%M:%S) ${1}]" >> /var/log/dedicated-install
 }
 
 LINE="-------------------------------------------------"
@@ -41,10 +39,10 @@ DISPLAY_MESSAGE () {
 
 DISPLAY_MESSAGE "System Information"
 
-echo "CURRENT TIME = "`date`
-ADD_TO_LOG "CURRENT TIME = "`date`
+echo "CURRENT DAY = "`date`
+ADD_TO_LOG "CURRENT DAY = "`date`
 echo "HOSTNAME = "`hostname`
-ADD_TO_LOG echo "HOSTNAME = "`hostname`
+ADD_TO_LOG "HOSTNAME = "`hostname`
 echo "USER id = "`whoami`
 ADD_TO_LOG "USER id = "`whoami`
 echo "IP ADDRESS = "`ip a s eth0 | grep "inet " | cut -f6 -d" "`
@@ -104,6 +102,7 @@ CHANGE_SSH_PORT () {
     sed -i "s/$SSH_PORT_CONFIG_STRING/$SSH_NEW_PORT_STRING/" $SSH_CONFIG_FILE
     DISPLAY_MESSAGE "SSH port changed successfully!"
     ADD_TO_LOG "SSH port changed successfully!"
+    ADD_TO_LOG "New SSH Port: ${PORT}"
   else
     echo "Unknow input given! Please retry.."
     CHANGE_SSH_PORT
