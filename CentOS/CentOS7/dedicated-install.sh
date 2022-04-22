@@ -138,7 +138,7 @@ DISPLAY_MESSAGE "Disabling And Removing NetworkManager"
 systemctl status NetworkManager
 systemctl disable NetworkManager
 systemctl status NetworkManager
-yum remove NetworkManager
+yum remove NetworkManager -y
 
 DISPLAY_MESSAGE "NetworkManager disabled and removed successfully!"
 ADD_TO_LOG "NetworkManager disabled and removed successfully!"
