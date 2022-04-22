@@ -10,13 +10,14 @@ ADD_TO_LOG () {
   echo "[$(date +%y/%m/%d_%H:%M:%S)] ${1}" >> /var/log/dedicated-install
 }
 
-LINE="-------------------------------------------------"
+LINE="--------------------------------------------------------------------------------------------------"
 # Argument 1: Message 1, Argument 2: Message 2, Argument 3: Message 3
 DISPLAY_MESSAGE () {
   echo
   echo
   echo
   echo
+  echo $LINE
   echo $LINE
   if [[ -n "$1" ]]
     then
@@ -31,13 +32,16 @@ DISPLAY_MESSAGE () {
         echo $3
   fi
   echo $LINE
+  echo $LINE
   echo
   echo
   echo
   echo
+  sleep 2
 }
 
 DISPLAY_MESSAGE "System Information"
+
 
 echo "CURRENT DAY = "`date`
 ADD_TO_LOG "CURRENT DAY = "`date`
@@ -87,9 +91,8 @@ systemctl stop firewalld
 DISPLAY_MESSAGE "Firewall Daemon disabled successfully!"
 ADD_TO_LOG "Firewall Daemon disabled successfully!"
 
-DISPLAY_MESSAGE "SSH Port Change"
-
 # Change SSH Port
+DISPLAY_MESSAGE "SSH Port Change"
 CHANGE_SSH_PORT () {
   read -r -p "Port Number (0 - 65535): " PORT
 
@@ -122,7 +125,6 @@ ASK_CHANGE_SSH_PORT
 
 # Disable SELinux
 DISPLAY_MESSAGE "Disabling SELinux"
-
 SELINUX_CONFIG_FILE="/etc/selinux/config"
 SELINUX_CONFIG_STRING="SELINUX=enforcing"
 SELINUX_NEW_STRING="SELINUX=disabled"
@@ -134,7 +136,6 @@ ADD_TO_LOG "SELinux disabled successfully!"
 
 # Disable and remove Network Manager
 DISPLAY_MESSAGE "Disabling And Removing NetworkManager"
-
 systemctl status NetworkManager
 systemctl disable NetworkManager
 systemctl status NetworkManager
@@ -144,6 +145,7 @@ DISPLAY_MESSAGE "NetworkManager disabled and removed successfully!"
 ADD_TO_LOG "NetworkManager disabled and removed successfully!"
 
 DISPLAY_MESSAGE "Please run sestatus command after this server reboots to check whether SELinux is still enforced."
+sleep 1
 
 # Reboot the server in 10 seconds.
 DISPLAY_MESSAGE "Rebooting the server in 10 seconds!"
