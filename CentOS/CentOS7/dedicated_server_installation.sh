@@ -212,7 +212,7 @@ addadditionalip() {
                 # IPADDR string
                 ipaddrstring="IPADDR"
                 currentipaddr="${ipaddrstring}${i}"
-                case `grep -F "$interfaceconfigfilefull" "$currentipaddr" >/dev/null; echo $?` in
+                case `grep -F "$currentipaddr" "$interfaceconfigfilefull" >/dev/null; echo $?` in
                 0)
                     break
                     ;;
@@ -224,7 +224,7 @@ addadditionalip() {
                         # PREFIX string
                         prefixstring="PREFIX"
                         currentprefix="${prefixstring}${i}"
-                        case `grep -F "$interfaceconfigfilefull" "$currentprefix" >/dev/null; echo $?` in
+                        case `grep -F "$currentprefix" "$interfaceconfigfilefull" >/dev/null; echo $?` in
                         0)
                             break
                             ;;
