@@ -7,6 +7,7 @@
 ###############################################################################################
 
 scriptversion=0.1.4
+currentscript="$0"
 
 ### Message and logs ###
 CURRENT_DATE () {
@@ -201,14 +202,31 @@ changerootpassword() {
     passwd
 }
 
+# Self deleting script based on: https://stackoverflow.com/a/34303677
+deletescript() {
+    shred -u ${currentscript};
+}
+
+clearhistoryexitssh() {
+    # Delete script log
+    rm ~/dedicated_server_installation.log
+
+    # Clear Bash command history
+    rm ~/.bash_history
+    touch ~/.bash_history
+
+    # Delete script
+    trap deletescript EXIT
+}
+
 mainmenu() {
     echo -ne "
 $(greenprint 'Dedicated server basic installations and configurations Bash script')
-$(greenprint 'Script by: Muhammad Hanis Irfan Bin Mohd Zaid')
-$(greenprint 'Script version: '${scriptversion})
-$(redprint 'Important: Make sure to delete the script and its log.')
-$(redprint 'Important: Make sure to run "history -c" to clear command history.')
+$(greenprint 'Script by: Muhammad Hanis Irfan Bin Mohd Zaid (https://hanisirfan.xyz)')
+$(greenprint 'Script version: '${scriptversion}' (CentOS 7)')
+$(magentaprint '-------------------------------------------------------------------------------')
 $(magentaprint 'MAIN MENU')
+$(magentaprint '-------------------------------------------------------------------------------')
 $(greenprint '1)') Update And Install Necessary Packages
 $(greenprint '2)') Disable And Stop Firewall Daemon
 $(greenprint '3)') Disable SELinux
@@ -217,6 +235,7 @@ $(greenprint '5)') Change SSH Port
 $(greenprint '6)') Add Additional IP
 $(greenprint '7)') Change Root User Password
 $(greenprint '8)') Reboot Server Now
+$(greenprint '9)') $(redprint 'Clear History & Exit from SSH')
 $(redprint '0)') Exit
 Choose an option:  "
     read -r ans
@@ -250,6 +269,11 @@ Choose an option:  "
         mainmenu
         ;;
     8)
+        DISPLAY_MESSAGE "Rebooting the server now!"
+        ADD_TO_LOG "Rebooting the server now!"
+        shutdown -r now
+        ;;
+    9)
         DISPLAY_MESSAGE "Rebooting the server now!"
         ADD_TO_LOG "Rebooting the server now!"
         shutdown -r now
