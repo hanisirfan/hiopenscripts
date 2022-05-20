@@ -6,7 +6,7 @@
 # Interactive Menu based on: https://gist.github.com/shinokada/9d54c820b127d0b771c3d87a157fc99d
 ###############################################################################################
 
-scriptversion=0.1.3
+scriptversion=0.1.4
 
 ### Message and logs ###
 CURRENT_DATE () {
@@ -173,6 +173,7 @@ addadditionalip() {
                             # Add PREFIX string to file
                             prefixstringwithprefix="${currentprefix}=${ipprefix}"
                             echo "${prefixstringwithprefix}" >> $interfaceconfigfilefull
+                            ADD_TO_LOG "Added a new Additional IP: ${ipaddress}/${ipprefix}"
                             break
                             ;;
                         *)
@@ -203,8 +204,8 @@ changerootpassword() {
 mainmenu() {
     echo -ne "
 $(greenprint 'Dedicated server basic installations and configurations Bash script')
-$(greenprint 'Script By: Muhammad Hanis Irfan Bin Mohd')
-$(greenprint 'Script Version: '${scriptversion})
+$(greenprint 'Script by: Muhammad Hanis Irfan Bin Mohd Zaid')
+$(greenprint 'Script version: '${scriptversion})
 $(redprint 'Important: Make sure to delete the script and its log.')
 $(redprint 'Important: Make sure to run "history -c" to clear command history.')
 $(magentaprint 'MAIN MENU')
