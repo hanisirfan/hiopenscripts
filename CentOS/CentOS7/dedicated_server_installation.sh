@@ -6,7 +6,7 @@
 # Interactive Menu based on: https://gist.github.com/shinokada/9d54c820b127d0b771c3d87a157fc99d
 ###############################################################################################
 
-scriptversion=0.1.1
+scriptversion=0.1.2
 
 ### Message and logs ###
 CURRENT_DATE () {
@@ -148,7 +148,7 @@ addadditionalip() {
         # Just hope that the admin inserted the IP and prefix correctly.
         read -r -p "IP Address (x.x.x.x): " ipaddress
         read -r -p "IP Prefix (1-32): " ipprefix
-        for i in {2..10}
+        for i in {2..15}
             do
                 # IPADDR string
                 ipaddrstring="IPADDR"
