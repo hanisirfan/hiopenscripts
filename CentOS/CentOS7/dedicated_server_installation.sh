@@ -203,17 +203,53 @@ addadditionalip() {
     read -r -p "Network Interface: " networkinterface
     interfaceconfigfilefull="${interfaceconfigfile}${networkinterface}"
     if [[ -f "$interfaceconfigfilefull" ]]; then
-        # Exist
-        DISPLAY_MESSAGE "Interface Exist"
-    else
-        # Does not exist
-        DISPLAY_MESSAGE "Interface Does Not Exist"
-    fi
+        # Validating the IP format is gonna be hard so I'll pass. 
+        # Just hope that the admin inserted the IP and prefix correctly.
+        read -r -p "IP Address (x.x.x.x): " ipaddress
+        read -r -p "IP Prefix (1-32): " ipprefix
+        for i in {2..10}
+            do
+                # IPADDR string
+                ipaddrstring="IPADDR"
+                currentipaddr="${ipaddrstring}${i}"
+                case `grep -F "$interfaceconfigfilefull" "$currentipaddr" >/dev/null; echo $?` in
+                0)
+                    break
+                    ;;
+                1)
+                    # Add IPADDR string to file
+                    ipaddrstringwithipaddress="${currentipaddr}=${ipaddress}"
+                    echo "${ipaddrstringwithipaddress}" >> interfaceconfigfilefull
 
-    # read -r -p "IP Address (x.x.x.x): " ipaddress
-    # read -r -p "IP Prefix (1-32): " ipprefix
-    # systemctl restart network
-    # ip addr show
+                        # PREFIX string
+                        prefixstring="PREFIX"
+                        currentprefix="${prefixstring}${i}"
+                        case `grep -F "$interfaceconfigfilefull" "$currentprefix" >/dev/null; echo $?` in
+                        0)
+                            break
+                            ;;
+                        1)
+                            # Add PREFIX string to file
+                            prefixstringwithprefix="${currentprefix}=${ipprefix}"
+                            echo "${prefixstringwithprefix}" >> interfaceconfigfilefull
+                            ;;
+                        *)
+                            # code if an error occurred
+                            ;;
+                        esac
+                    ;;
+                *)
+                    # code if an error occurred
+                    ;;
+                esac
+
+        done
+        # systemctl restart network
+        # ip addr show
+    else
+        DISPLAY_MESSAGE "Interface does not exist!"
+        addadditionalip
+    fi
 }
 
 changerootpassword() {
