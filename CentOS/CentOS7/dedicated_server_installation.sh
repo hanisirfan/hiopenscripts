@@ -29,7 +29,6 @@ DISPLAY_MESSAGE () {
     then
         echo $3
   fi
-  sleep 1
 }
 
 ### Colors ###
@@ -196,6 +195,26 @@ changesshport () {
     fi
 }
 
+addadditionalip() {
+    # Add Additional IP
+    DISPLAY_MESSAGE "Add Additional IP"
+    interfaceconfigfile="/etc/sysconfig/network-scripts/ifcfg-"
+
+    read -r -p "Network Interface: " networkinterface
+    if [[ -f "$interfaceconfigfile"+="$networkinterface" ]]; then
+        # Exist
+        DISPLAY_MESSAGE "Interface Exist"
+    else
+        # Does not exist
+        DISPLAY_MESSAGE "Interface Does Not Exist"
+    fi
+
+    # read -r -p "IP Address (x.x.x.x): " ipaddress
+    # read -r -p "IP Prefix (1-32): " ipprefix
+    # systemctl restart network
+    # ip addr show
+}
+
 changerootpassword() {
     # Change Root User Password
     DISPLAY_MESSAGE "Change Root User Password"
@@ -242,7 +261,7 @@ Choose an option:  "
         mainmenu
         ;;
     6)
-        updateinstallpackages
+        addadditionalip
         mainmenu
         ;;
     7)
