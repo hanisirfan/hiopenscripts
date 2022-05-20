@@ -6,7 +6,7 @@
 # Interactive Menu based on: https://gist.github.com/shinokada/9d54c820b127d0b771c3d87a157fc99d
 ###############################################################################################
 
-scriptversion=0.1.2
+scriptversion=0.1.3
 
 ### Message and logs ###
 CURRENT_DATE () {
@@ -160,7 +160,7 @@ addadditionalip() {
                 1)
                     # Add IPADDR string to file
                     ipaddrstringwithipaddress="${currentipaddr}=${ipaddress}"
-                    echo "${ipaddrstringwithipaddress}" >> interfaceconfigfilefull
+                    echo "${ipaddrstringwithipaddress}" >> $interfaceconfigfilefull
 
                         # PREFIX string
                         prefixstring="PREFIX"
@@ -172,7 +172,7 @@ addadditionalip() {
                         1)
                             # Add PREFIX string to file
                             prefixstringwithprefix="${currentprefix}=${ipprefix}"
-                            echo "${prefixstringwithprefix}" >> interfaceconfigfilefull
+                            echo "${prefixstringwithprefix}" >> $interfaceconfigfilefull
                             break
                             ;;
                         *)
