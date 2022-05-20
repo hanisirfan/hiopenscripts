@@ -210,7 +210,7 @@ deletescript() {
 
 clearhistoryexitssh() {
     # Delete script log
-    rm ~/dedicated_server_installation.log
+    rm ./dedicated_server_installation.log
 
     # Clear Bash command history
     rm $HISTFILE
