@@ -113,6 +113,7 @@ disableremovenetworkmanager() {
     DISPLAY_MESSAGE "Disabling And Removing NetworkManager"
     systemctl disable NetworkManager
     yum remove NetworkManager -y
+    ADD_TO_LOG "NetworkManager disabled and removed successfully!"
 }
 
 changesshport () {
@@ -212,8 +213,7 @@ clearhistoryexitssh() {
     rm ~/dedicated_server_installation.log
 
     # Clear Bash command history
-    rm ~/.bash_history
-    touch ~/.bash_history
+    rm $HISTFILE
 
     # Delete script
     trap deletescript EXIT
@@ -235,8 +235,8 @@ $(greenprint '5)') Change SSH Port
 $(greenprint '6)') Add Additional IP
 $(greenprint '7)') Change Root User Password
 $(greenprint '8)') Reboot Server Now
-$(greenprint '9)') $(redprint 'Clear History & Exit from SSH')
-$(redprint '0)') Exit
+$(redprint '9) Clear History & Exit from SSH')
+$(greenprint '0)') Exit
 Choose an option:  "
     read -r ans
     case $ans in
