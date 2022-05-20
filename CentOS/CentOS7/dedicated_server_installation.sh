@@ -213,11 +213,11 @@ clearhistoryexitssh() {
     rm ./dedicated_server_installation.log
 
     # Clear Bash command history https://askubuntu.com/a/331655
-    history -c && history -w
+    history -cw
 
     # Delete script
     deletescript
-    EXIT
+    exit 1
 }
 
 mainmenu() {
