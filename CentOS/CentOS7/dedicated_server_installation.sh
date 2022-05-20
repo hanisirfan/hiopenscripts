@@ -212,7 +212,7 @@ clearhistoryexitssh() {
     shred -u ${currentscript};
 
     # Clear Bash command history
-    su -c "history -c" root && su -c "cat /dev/null > ~/.bash_history" root && exit
+    su -c "history -cw" root && su -c "cat /dev/null > ~/.bash_history" root && exit
 }
 
 mainmenu() {
