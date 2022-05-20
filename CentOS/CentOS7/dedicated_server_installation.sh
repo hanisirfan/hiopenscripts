@@ -203,21 +203,16 @@ changerootpassword() {
     passwd
 }
 
-# Self deleting script based on: https://stackoverflow.com/a/34303677
-deletescript() {
-    shred -u ${currentscript};
-}
-
 clearhistoryexitssh() {
     # Delete script log
     rm ./dedicated_server_installation.log
 
-    # Clear Bash command history https://askubuntu.com/a/331655
-    history -cw
-
     # Delete script
-    deletescript
-    exit 1
+    # Self deleting script based on: https://stackoverflow.com/a/34303677
+    shred -u ${currentscript};
+
+    # Clear Bash command history https://askubuntu.com/a/331655
+    rm -f $HISTFILE && unset HISTFILE && exit
 }
 
 mainmenu() {
