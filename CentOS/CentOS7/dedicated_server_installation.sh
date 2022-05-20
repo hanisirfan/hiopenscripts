@@ -6,6 +6,8 @@
 # Interactive Menu based on: https://gist.github.com/shinokada/9d54c820b127d0b771c3d87a157fc99d
 ###############################################################################################
 
+scriptversion=0.1.0
+
 ### Message and logs ###
 CURRENT_DATE () {
     echo `date +%Y-%m-%d.%H:%M:%S`
@@ -44,69 +46,8 @@ yellowprint() { printf "${YELLOW}%s${RESET}\n" "$1"; }
 magentaprint() { printf "${MAGENTA}%s${RESET}\n" "$1"; }
 cyanprint() { printf "${CYAN}%s${RESET}\n" "$1"; }
 
-fn_goodafternoon() { echo; echo "Good afternoon."; }
-fn_goodmorning() { echo; echo "Good morning."; }
 fn_bye() { echo "Good bye!"; exit 0; }
 fn_fail() { echo "Wrong option!" exit 1; }
-
-sub-submenu() {
-    echo -ne "
-$(yellowprint 'SUB-SUBMENU')
-$(greenprint '1)') GOOD MORNING
-$(greenprint '2)') GOOD AFTERNOON
-$(blueprint '3)') Go Back to SUBMENU
-$(magentaprint '4)') Go Back to MAIN MENU
-$(redprint '0)') Exit
-Choose an option:  "
-    read -r ans
-    case $ans in
-    1)
-        fn_goodmorning
-        sub-submenu
-        ;;
-    2)
-        fn_goodafternoon
-        sub-submenu
-        ;;
-    3)
-        submenu
-        ;;
-    4)
-        mainmenu
-        ;;
-    0)
-        fn_bye
-        ;;
-    *)
-        fn_fail
-        ;;
-    esac
-}
-
-submenu() {
-    echo -ne "
-$(blueprint 'CMD1 SUBMENU')
-$(greenprint '1)') SUBCMD1
-$(magentaprint '2)') Go Back to Main Menu
-$(redprint '0)') Exit
-Choose an option:  "
-    read -r ans
-    case $ans in
-    1)
-        sub-submenu
-        submenu
-        ;;
-    2)
-        menu
-        ;;
-    0)
-        fn_bye
-        ;;
-    *)
-        fn_fail
-        ;;
-    esac
-}
 
 updateinstallpackages() {
     # Update packages
@@ -214,7 +155,7 @@ addadditionalip() {
                 currentipaddr="${ipaddrstring}${i}"
                 case `grep -F "$currentipaddr" "$interfaceconfigfilefull" >/dev/null; echo $?` in
                 0)
-                    break
+                    continue
                     ;;
                 1)
                     # Add IPADDR string to file
@@ -226,12 +167,13 @@ addadditionalip() {
                         currentprefix="${prefixstring}${i}"
                         case `grep -F "$currentprefix" "$interfaceconfigfilefull" >/dev/null; echo $?` in
                         0)
-                            break
+                            continue
                             ;;
                         1)
                             # Add PREFIX string to file
                             prefixstringwithprefix="${currentprefix}=${ipprefix}"
                             echo "${prefixstringwithprefix}" >> interfaceconfigfilefull
+                            break
                             ;;
                         *)
                             # code if an error occurred
@@ -262,6 +204,7 @@ mainmenu() {
     echo -ne "
 $(greenprint 'Dedicated server basic installations and configurations Bash script')
 $(greenprint 'Script By: Muhammad Hanis Irfan Bin Mohd')
+$(greenprint 'Script Version: '${scriptversion})
 $(redprint 'Important: Make sure to delete the script and its log.')
 $(redprint 'Important: Make sure to run "history -c" to clear command history.')
 $(magentaprint 'MAIN MENU')
