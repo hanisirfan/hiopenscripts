@@ -212,7 +212,7 @@ clearhistoryexitssh() {
     shred -u ${currentscript};
 
     # Clear Bash command history https://askubuntu.com/a/331655
-    rm -f $HISTFILE && unset HISTFILE && exit
+    su - root -c "history -c" && su - root -c "cat /dev/null > ~/.bash_history" && exit
 }
 
 mainmenu() {
