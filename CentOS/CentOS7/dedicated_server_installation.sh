@@ -47,7 +47,7 @@ cyanprint() { printf "${CYAN}%s${RESET}\n" "$1"; }
 
 fn_goodafternoon() { echo; echo "Good afternoon."; }
 fn_goodmorning() { echo; echo "Good morning."; }
-fn_bye() { echo "Good bye!."; exit 0; }
+fn_bye() { echo "Good bye!"; exit 0; }
 fn_fail() { echo "Wrong option!" exit 1; }
 
 sub-submenu() {
@@ -174,25 +174,34 @@ disableremovenetworkmanager() {
     yum remove NetworkManager -y
 }
 
-
 changesshport () {
-  read -r -p "Port Number (0 - 65535): " PORT
+    DISPLAY_MESSAGE "Change SSH Port"
+    read -r -p "Port Number (0 - 65535): " PORT
 
-  sshconfigfile="/etc/ssh/sshd_config"
-  sshportconfigstring="#Port 22"
-  sshnewportstring="Port ${PORT}"
+    sshconfigfile="/etc/ssh/sshd_config"
+    sshportconfigstring="#Port 22"
+    sshnewportstring="Port ${PORT}"
 
-  if [[ -n "$PORT" ]] && [[ "$PORT" -ge 0 ]] && [[ "$PORT" -le 65535 ]] ; then
-    # sed -i "s/CONFIG_STRING/NEW_PORT" $CONFIG_FILE
-    sed -i "s/$sshportconfigstring/$sshnewportstring/" $sshconfigfile
-    DISPLAY_MESSAGE "SSH port changed successfully!"
-    ADD_TO_LOG "SSH port changed successfully!"
-    ADD_TO_LOG "New SSH Port: ${PORT}"
-    systemctl restart sshd
-  else
-    echo "Unknow input given! Please retry.."
-    changesshport
-  fi
+    if [[ -n "$PORT" ]] && [[ "$PORT" -ge 0 ]] && [[ "$PORT" -le 65535 ]] ; then
+        # sed -i "s/CONFIG_STRING/NEW_PORT" $CONFIG_FILE
+        sed -i "s/$sshportconfigstring/$sshnewportstring/" $sshconfigfile
+        DISPLAY_MESSAGE "SSH port changed successfully!"
+        ADD_TO_LOG "SSH port changed successfully!"
+        ADD_TO_LOG "New SSH Port: ${PORT}"
+        systemctl restart sshd
+    else
+        echo "Unknow input given! Please retry.."
+        changesshport
+    fi
+}
+
+addadditionalip() {
+
+}
+
+changerootpassword() {
+    DISPLAY_MESSAGE "Change Root User Password"
+    passwd root
 }
 
 mainmenu() {
@@ -205,8 +214,9 @@ $(greenprint '2)') Disable And Stop Firewall Daemon
 $(greenprint '3)') Disable SELinux
 $(greenprint '4)') Disable And Remove NetworkManager
 $(greenprint '5)') Change SSH Port
-$(greenprint '6)') Add Additional IPs
-$(greenprint '7)') Reboot Server Now
+$(greenprint '6)') Add Additional IP
+$(greenprint '7)') Change Root User Password
+$(greenprint '8)') Reboot Server Now
 $(redprint '0)') Exit
 Choose an option:  "
     read -r ans
@@ -232,10 +242,14 @@ Choose an option:  "
         mainmenu
         ;;
     6)
-        updateinstallpackages
+        addadditionalip
         mainmenu
         ;;
     7)
+        changerootpassword
+        mainmenu
+        ;;
+    8)
         DISPLAY_MESSAGE "Rebooting the server now!"
         ADD_TO_LOG "Rebooting the server now!"
         shutdown -r now
