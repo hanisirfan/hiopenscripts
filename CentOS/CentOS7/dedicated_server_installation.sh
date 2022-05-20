@@ -211,8 +211,8 @@ clearhistoryexitssh() {
     # Self deleting script based on: https://stackoverflow.com/a/34303677
     shred -u ${currentscript};
 
-    # Clear Bash command history https://askubuntu.com/a/331655
-    su - root -c "history -c" && su - root -c "cat /dev/null > ~/.bash_history" && exit
+    # Clear Bash command history
+    su -c "history -c" root && su -c "cat /dev/null > ~/.bash_history" root && exit
 }
 
 mainmenu() {
