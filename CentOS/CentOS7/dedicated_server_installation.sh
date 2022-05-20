@@ -274,9 +274,7 @@ Choose an option:  "
         shutdown -r now
         ;;
     9)
-        DISPLAY_MESSAGE "Rebooting the server now!"
-        ADD_TO_LOG "Rebooting the server now!"
-        shutdown -r now
+        clearhistoryexitssh
         ;;
     0)
         fn_bye
