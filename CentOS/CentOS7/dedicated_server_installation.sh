@@ -196,10 +196,6 @@ changesshport () {
     fi
 }
 
-addadditionalip() {
-
-}
-
 changerootpassword() {
     # Change Root User Password
     DISPLAY_MESSAGE "Change Root User Password"
@@ -246,7 +242,7 @@ Choose an option:  "
         mainmenu
         ;;
     6)
-        addadditionalip
+        updateinstallpackages
         mainmenu
         ;;
     7)
