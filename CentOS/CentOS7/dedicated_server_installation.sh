@@ -175,6 +175,7 @@ disableremovenetworkmanager() {
 }
 
 changesshport () {
+    # Disable SSH Port
     DISPLAY_MESSAGE "Change SSH Port"
     read -r -p "Port Number (0 - 65535): " PORT
 
@@ -200,14 +201,17 @@ addadditionalip() {
 }
 
 changerootpassword() {
+    # Change Root User Password
     DISPLAY_MESSAGE "Change Root User Password"
-    passwd root
+    passwd
 }
 
 mainmenu() {
     echo -ne "
 $(greenprint 'Dedicated server basic installations and configurations Bash script')
 $(greenprint 'Script By: Muhammad Hanis Irfan Bin Mohd')
+$(redprint 'Important: Make sure to delete the script and its log.')
+$(redprint 'Important: Make sure to run "history -c" to clear command history.')
 $(magentaprint 'MAIN MENU')
 $(greenprint '1)') Update And Install Necessary Packages
 $(greenprint '2)') Disable And Stop Firewall Daemon
