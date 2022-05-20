@@ -145,6 +145,56 @@ updateinstallpackages() {
     DISPLAY_MESSAGE "Update And Install Necessary Packages completed!"
 }
 
+disablestopfirewalld() {
+    # Disable and stop firewall daemon
+    DISPLAY_MESSAGE "Disabling Firewall Daemon"
+    systemctl disable firewalld
+    systemctl stop firewalld
+    DISPLAY_MESSAGE "Firewall Daemon disabled successfully!"
+    ADD_TO_LOG "Firewall Daemon disabled successfully!"
+}
+
+disableselinux() {
+    # Disable SELinux
+    DISPLAY_MESSAGE "Disabling SELinux"
+    SELINUX_CONFIG_FILE="/etc/selinux/config"
+    SELINUX_CONFIG_STRING="SELINUX=enforcing"
+    SELINUX_NEW_STRING="SELINUX=disabled"
+
+    sed -i "s/$SELINUX_CONFIG_STRING/$SELINUX_NEW_STRING/" $SELINUX_CONFIG_FILE
+
+    DISPLAY_MESSAGE "SELinux disabled successfully!"
+    ADD_TO_LOG "SELinux disabled successfully!"
+}
+
+disableremovenetworkmanager() {
+    # Disable and remove Network Manager
+    DISPLAY_MESSAGE "Disabling And Removing NetworkManager"
+    systemctl disable NetworkManager
+    yum remove NetworkManager -y
+}
+
+
+changesshport () {
+  read -r -p "Port Number (0 - 65535): " PORT
+
+  sshconfigfile="/etc/ssh/sshd_config"
+  sshportconfigstring="#Port 22"
+  sshnewportstring="Port ${PORT}"
+
+  if [[ -n "$PORT" ]] && [[ "$PORT" -ge 0 ]] && [[ "$PORT" -le 65535 ]] ; then
+    # sed -i "s/CONFIG_STRING/NEW_PORT" $CONFIG_FILE
+    sed -i "s/$sshportconfigstring/$sshnewportstring/" $sshconfigfile
+    DISPLAY_MESSAGE "SSH port changed successfully!"
+    ADD_TO_LOG "SSH port changed successfully!"
+    ADD_TO_LOG "New SSH Port: ${PORT}"
+    systemctl restart sshd
+  else
+    echo "Unknow input given! Please retry.."
+    changesshport
+  fi
+}
+
 mainmenu() {
     echo -ne "
 $(greenprint 'Dedicated server basic installations and configurations Bash script')
@@ -152,9 +202,9 @@ $(greenprint 'Script By: Muhammad Hanis Irfan Bin Mohd')
 $(magentaprint 'MAIN MENU')
 $(greenprint '1)') Update And Install Necessary Packages
 $(greenprint '2)') Disable And Stop Firewall Daemon
-$(greenprint '3)') Change SSH Port
-$(greenprint '4)') Disable SELinux
-$(greenprint '5)') Disable And Remove NetworkManager
+$(greenprint '3)') Disable SELinux
+$(greenprint '4)') Disable And Remove NetworkManager
+$(greenprint '5)') Change SSH Port
 $(greenprint '6)') Add Additional IPs
 $(greenprint '7)') Reboot Server Now
 $(redprint '0)') Exit
@@ -166,19 +216,19 @@ Choose an option:  "
         mainmenu
         ;;
     2)
-        updateinstallpackages
+        disablestopfirewalld
         mainmenu
         ;;
     3)
-        updateinstallpackages
+        disableselinux
         mainmenu
         ;;
     4)
-        updateinstallpackages
+        disableremovenetworkmanager
         mainmenu
         ;;
     5)
-        updateinstallpackages
+        changesshport
         mainmenu
         ;;
     6)
@@ -186,8 +236,9 @@ Choose an option:  "
         mainmenu
         ;;
     7)
-        updateinstallpackages
-        mainmenu
+        DISPLAY_MESSAGE "Rebooting the server now!"
+        ADD_TO_LOG "Rebooting the server now!"
+        shutdown -r now
         ;;
     0)
         fn_bye
