@@ -201,7 +201,8 @@ addadditionalip() {
     interfaceconfigfile="/etc/sysconfig/network-scripts/ifcfg-"
 
     read -r -p "Network Interface: " networkinterface
-    if [[ -f "$interfaceconfigfile"+="$networkinterface" ]]; then
+    interfaceconfigfilefull="${interfaceconfigfile}${networkinterface}"
+    if [[ -f "$interfaceconfigfilefull" ]]; then
         # Exist
         DISPLAY_MESSAGE "Interface Exist"
     else
