@@ -217,8 +217,7 @@ clearhistoryexitssh() {
     su -c 'cat /dev/null > /root/.bash_history' root
 
     # Exit from SSH
-    su -c 'exit' root
-    exit
+    kill -HUP "$PPID"
 }
 
 mainmenu() {
