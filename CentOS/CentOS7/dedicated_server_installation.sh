@@ -212,9 +212,8 @@ clearhistoryexitssh() {
     shred -u ${currentscript};
 
     # Clear Bash command history
-    su -c 'history -cw' root
-    su -c 'unset HISTFILE' root
-    su -c 'cat /dev/null > /root/.bash_history' root
+    history -cw
+    cat /dev/null > ~/.bash_history
 
     # Exit from SSH
     kill -HUP "$PPID"
