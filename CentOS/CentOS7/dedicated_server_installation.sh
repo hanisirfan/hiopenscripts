@@ -8,8 +8,6 @@
 
 scriptversion=0.1.4
 currentscript="$0"
-HISTFILE=~/.bash_history
-set -o history
 
 ### Message and logs ###
 CURRENT_DATE () {
@@ -214,10 +212,12 @@ clearhistoryexitssh() {
     shred -u ${currentscript};
 
     # Clear Bash command history
-    history -cw
-    cat /dev/null > ~/.bash_history
+    su -c 'history -cw' root
+    su -c 'unset HISTFILE' root
+    su -c 'cat /dev/null > /root/.bash_history' root
 
     # Exit from SSH
+    su -c 'exit' root
     exit
 }
 
