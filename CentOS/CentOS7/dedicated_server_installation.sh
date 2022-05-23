@@ -212,7 +212,7 @@ clearhistoryexitssh() {
 
     # Clear Bash command history
     history -cw
-    rm -f /root/.bash_history
+    shred -u ~/.bash_history
 
     # Exit from SSH
     exit
