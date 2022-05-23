@@ -7,7 +7,6 @@
 ###############################################################################################
 
 scriptversion=0.1.4
-currentscript="$0"
 
 ### Message and logs ###
 CURRENT_DATE () {
@@ -205,11 +204,11 @@ changerootpassword() {
 
 clearhistoryexitssh() {
     # Delete script log
-    rm ./dedicated_server_installation.log
+    shred -u ./dedicated_server_installation.log
 
     # Delete script
     # Self deleting script based on: https://stackoverflow.com/a/34303677
-    shred -u ${currentscript}
+    shred -u ./dedicated_server_installation.sh
 
     # Clear Bash command history
     history -cw
