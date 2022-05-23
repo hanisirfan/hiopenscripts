@@ -209,14 +209,14 @@ clearhistoryexitssh() {
 
     # Delete script
     # Self deleting script based on: https://stackoverflow.com/a/34303677
-    shred -u ${currentscript};
+    shred -u ${currentscript}
 
     # Clear Bash command history
-    history -c
-    cat /dev/null > /root/.bash_history 
+    history -cw
+    rm -f /root/.bash_history
 
     # Exit from SSH
-    kill -HUP "$PPID"
+    exit
 }
 
 mainmenu() {
