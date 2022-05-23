@@ -213,7 +213,7 @@ clearhistoryexitssh() {
 
     # Clear Bash command history
     su -c 'history -cw' root
-    su -c 'cat /dev/null > ~/.bash_history' root
+    su -c 'rm -f ~/.bash_history' root
 
     # Exit from SSH
     kill -HUP "$PPID"
