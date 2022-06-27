@@ -55,33 +55,33 @@ fn_fail() { echo "Wrong option!" exit 1; }
 updateinstallpackages() {
     # Update packages
     DISPLAY_MESSAGE "Updating Packages"
-    yum -y update
+    dnf -y upgrade
     DISPLAY_MESSAGE "Packages update completed!"
     ADD_TO_LOG "Packages update completed!"
 
     # Install nano
     DISPLAY_MESSAGE "Installing Nano"
-    yum -y install nano
+    dnf -y install nano
     DISPLAY_MESSAGE "Nano installation completed!"
     ADD_TO_LOG "Nano installation completed!"
 
     # Install EPEL
     DISPLAY_MESSAGE "Installing EPEL"
-    yum search epel
-    yum -y install epel-release.noarch
+    dnf search epel
+    dnf -y install epel-release.noarch
     DISPLAY_MESSAGE "EPEL installation completed!"
     ADD_TO_LOG "EPEL installation completed!"
 
     # Install Screen
     DISPLAY_MESSAGE "Installing Screen"
-    yum -y install wget screen
+    dnf -y install wget screen
     DISPLAY_MESSAGE "Screen installation completed!"
     ADD_TO_LOG "Screen installation completed!"
 
     # Install networking tools
     DISPLAY_MESSAGE "Installing Monitoring And Networking Tools"
-    yum -y install iftop iotop atop htop
-    yum -y install net-tools
+    dnf -y install iftop iotop atop htop
+    dnf -y install net-tools
     DISPLAY_MESSAGE "Monitoring and networking tools installation completed!"
     ADD_TO_LOG "Monitoring and networking tools installation completed!"
 
@@ -114,7 +114,7 @@ disableremovenetworkmanager() {
     # Disable and remove Network Manager
     DISPLAY_MESSAGE "Disabling And Removing NetworkManager"
     systemctl disable NetworkManager
-    yum remove NetworkManager -y
+    dnf remove NetworkManager -y
     ADD_TO_LOG "NetworkManager disabled and removed successfully!"
 }
 
