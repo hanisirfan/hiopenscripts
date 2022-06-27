@@ -232,9 +232,9 @@ $(magentaprint '----------------------------------------------------------------
 $(magentaprint 'MAIN MENU')
 $(magentaprint '-------------------------------------------------------------------------------')
 $(greenprint '1)') Update And Install Necessary Packages
-$(greenprint '2)') Disable And Stop Firewall Daemon
+$(redprint '2) Disable And Stop Firewall Daemon (Deprecated)')
 $(greenprint '3)') Disable SELinux
-$(redprint '4)') Disable And Remove NetworkManager (Deprecated)
+$(redprint '4) Disable And Remove NetworkManager (Deprecated)')
 $(greenprint '5)') Change SSH Port
 $(greenprint '6)') Add Additional IP
 $(greenprint '7)') Change Root User Password
@@ -249,7 +249,8 @@ Choose an option:  "
         mainmenu
         ;;
     2)
-        disablestopfirewalld
+        #disablestopfirewalld
+        DISPLAY_MESSAGE "This feature is deprecated due to the fact that AlmaLinux 8 Non GUI doesn't come with firewalld by default."
         mainmenu
         ;;
     3)
