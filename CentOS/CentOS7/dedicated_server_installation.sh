@@ -7,7 +7,7 @@
 ###############################################################################################
 
 scriptversion=0.1.6
-distroversion='CentOS 7'
+currentdistroversion="CentOS 7"
 ### Message and logs ###
 CURRENT_DATE () {
     echo `date +%Y-%m-%d.%H:%M:%S`
@@ -228,7 +228,7 @@ mainmenu() {
     echo -ne "
 $(greenprint 'Dedicated server basic installations and configurations Bash script')
 $(greenprint 'Script by: Muhammad Hanis Irfan Bin Mohd Zaid (https://hanisirfan.xyz)')
-$(greenprint 'Script version: '${scriptversion}' for '${distroversion}'')
+$(greenprint 'Script version: '${scriptversion}' for '${currentdistroversion}'')
 $(magentaprint '-------------------------------------------------------------------------------')
 $(magentaprint 'MAIN MENU')
 $(magentaprint '-------------------------------------------------------------------------------')
