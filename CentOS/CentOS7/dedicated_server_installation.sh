@@ -19,6 +19,8 @@ ADD_TO_LOG () {
 
 # Argument 1: Message 1, Argument 2: Message 2, Argument 3: Message 3
 DISPLAY_MESSAGE () {
+  echo ""
+  echo "----------------------------------------------------------------------------"
   if [[ -n "$1" ]]
     then
         echo $1
@@ -31,6 +33,8 @@ DISPLAY_MESSAGE () {
     then
         echo $3
   fi
+  echo "----------------------------------------------------------------------------"
+  echo ""
 }
 
 ### Colors ###
@@ -224,7 +228,7 @@ mainmenu() {
     echo -ne "
 $(greenprint 'Dedicated server basic installations and configurations Bash script')
 $(greenprint 'Script by: Muhammad Hanis Irfan Bin Mohd Zaid (https://hanisirfan.xyz)')
-$(greenprint 'Script version: '${scriptversion}' '${distroversion}'')
+$(greenprint 'Script version: '${scriptversion}' ('${distroversion}')')
 $(magentaprint '-------------------------------------------------------------------------------')
 $(magentaprint 'MAIN MENU')
 $(magentaprint '-------------------------------------------------------------------------------')
