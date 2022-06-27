@@ -231,7 +231,7 @@ $(magentaprint '----------------------------------------------------------------
 $(greenprint '1)') Update And Install Necessary Packages
 $(greenprint '2)') Disable And Stop Firewall Daemon
 $(greenprint '3)') Disable SELinux
-$(greenprint '4)') Disable And Remove NetworkManager
+$(redprint '4)') Disable And Remove NetworkManager (Deprecated)
 $(greenprint '5)') Change SSH Port
 $(greenprint '6)') Add Additional IP
 $(greenprint '7)') Change Root User Password
@@ -254,7 +254,8 @@ Choose an option:  "
         mainmenu
         ;;
     4)
-        disableremovenetworkmanager
+        # disableremovenetworkmanager
+        DISPLAY_MESSAGE "This feature is deprecated due to the deprecation of network-scripts in AlmaLinux 8 and the replacement of it with NetworkManager." "You can refer to this link: https://www.golinuxcloud.com/unit-network-service-not-found-rhel-8-linux/"
         mainmenu
         ;;
     5)
