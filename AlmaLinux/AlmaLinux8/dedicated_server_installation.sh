@@ -7,7 +7,7 @@
 ###############################################################################################
 
 scriptversion=0.1.0
-distroversion="AlmaLinux 8"
+distroversion='AlmaLinux 8'
 ### Message and logs ###
 CURRENT_DATE () {
     echo `date +%Y-%m-%d.%H:%M:%S`

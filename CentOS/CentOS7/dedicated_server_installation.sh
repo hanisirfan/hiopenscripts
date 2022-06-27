@@ -7,7 +7,7 @@
 ###############################################################################################
 
 scriptversion=0.1.6
-distroversion="CentOS 7"
+distroversion='CentOS 7'
 ### Message and logs ###
 CURRENT_DATE () {
     echo `date +%Y-%m-%d.%H:%M:%S`
