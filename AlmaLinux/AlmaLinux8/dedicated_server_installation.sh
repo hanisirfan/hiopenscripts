@@ -6,8 +6,8 @@
 # Interactive Menu based on: https://gist.github.com/shinokada/9d54c820b127d0b771c3d87a157fc99d
 ###############################################################################################
 
-scriptversion=0.1.5
-distroversion="CentOS 7"
+scriptversion=0.1.0
+distroversion="AlmaLinux 8"
 ### Message and logs ###
 CURRENT_DATE () {
     echo `date +%Y-%m-%d.%H:%M:%S`
