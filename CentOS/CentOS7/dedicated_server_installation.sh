@@ -6,7 +6,7 @@
 # Interactive Menu based on: https://gist.github.com/shinokada/9d54c820b127d0b771c3d87a157fc99d
 ###############################################################################################
 
-scriptversion=0.1.5
+scriptversion=0.1.6
 distroversion="CentOS 7"
 ### Message and logs ###
 CURRENT_DATE () {
