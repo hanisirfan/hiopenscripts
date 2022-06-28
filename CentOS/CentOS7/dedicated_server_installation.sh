@@ -49,8 +49,8 @@ yellowprint() { printf "${YELLOW}%s${RESET}\n" "$1"; }
 magentaprint() { printf "${MAGENTA}%s${RESET}\n" "$1"; }
 cyanprint() { printf "${CYAN}%s${RESET}\n" "$1"; }
 
-fn_bye() { echo "Good bye!"; exit 0; }
-fn_fail() { echo "Wrong option!" exit 1; }
+fn_bye() { echo "Good bye!"; echo "Exiting from the script!"; deactivate; }
+fn_fail() { echo "Wrong option!"; echo "Exiting from the script!"; deactivate; }
 
 updateinstallpackages() {
     # Update packages
@@ -235,12 +235,12 @@ $(greenprint '1)') Update And Install Necessary Packages
 $(greenprint '2)') Disable And Stop Firewall Daemon
 $(greenprint '3)') Disable SELinux
 $(greenprint '4)') Disable And Remove NetworkManager
-$(greenprint '5)') Change SSH Port
-$(greenprint '6)') Add Additional IP
-$(greenprint '7)') Change Root User Password
-$(greenprint '8)') Reboot Server Now
+$(greenprint '5)') Reboot Server Now
+$(greenprint '6)') Change SSH Port
+$(greenprint '7)') Add Additional IP
+$(greenprint '8)') Change Root User Password
 $(redprint '9) Clear History & Exit from SSH')
-$(greenprint '0)') Exit
+$(greenprint '0)') Exit From Script
 Choose an option:  "
     read -r ans
     case $ans in
@@ -261,21 +261,21 @@ Choose an option:  "
         mainmenu
         ;;
     5)
-        changesshport
-        mainmenu
-        ;;
-    6)
-        addadditionalip
-        mainmenu
-        ;;
-    7)
-        changerootpassword
-        mainmenu
-        ;;
-    8)
         DISPLAY_MESSAGE "Rebooting the server now!"
         ADD_TO_LOG "Rebooting the server now!"
         shutdown -r now
+        ;;
+    6)
+        changesshport
+        mainmenu
+        ;;
+    7)
+        addadditionalip
+        mainmenu
+        ;;
+    8)
+        changerootpassword
+        mainmenu
         ;;
     9)
         clearhistoryexitssh
