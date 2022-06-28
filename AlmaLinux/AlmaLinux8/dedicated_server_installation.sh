@@ -50,7 +50,7 @@ magentaprint() { printf "${MAGENTA}%s${RESET}\n" "$1"; }
 cyanprint() { printf "${CYAN}%s${RESET}\n" "$1"; }
 
 fn_bye() { echo "Good bye!"; echo "Exiting from the script!"; deactivate; }
-fn_fail() { echo "Wrong option!"; echo "Exiting from the script!"; deactivate; }
+fn_fail() { echo "Wrong option!"; mainmenu; }
 
 updateinstallpackages() {
     # Update packages
