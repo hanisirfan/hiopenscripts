@@ -1,19 +1,21 @@
-------------
-CentOS 7
-------------
-curl -o dedicated_server_installation.sh https://raw.githubusercontent.com/hanisirfan/hiopenscripts/main/CentOS/CentOS7/dedicated_server_installation.sh
 
-chmod +x dedicated_server_installation.sh
+# CentOS 7
 
-# Run script at current shell instead of opening different shell for the script.
-source ./dedicated_server_installation.sh
+1. `curl -o dedicated_server_installation.sh https://raw.githubusercontent.com/hanisirfan/hiopenscripts/main/CentOS/CentOS7/dedicated_server_installation.sh`
 
-------------
-AlmaLinux 8
-------------
-curl -o dedicated_server_installation.sh https://raw.githubusercontent.com/hanisirfan/hiopenscripts/main/AlmaLinux/AlmaLinux8/dedicated_server_installation.sh
+2. `chmod +x dedicated_server_installation.sh`
 
-chmod +x dedicated_server_installation.sh
+3. Run script at current shell instead of opening different shell for the script.
 
-# Run script at current shell instead of opening different shell for the script.
-source ./dedicated_server_installation.sh
+    `source ./dedicated_server_installation.sh`
+
+
+# AlmaLinux 8
+
+1. `curl -o dedicated_server_installation.sh https://raw.githubusercontent.com/hanisirfan/hiopenscripts/main/AlmaLinux/AlmaLinux8/dedicated_server_installation.sh`
+
+2. `chmod +x dedicated_server_installation.sh`
+
+3. Run script at current shell instead of opening different shell for the script.
+
+    `source ./dedicated_server_installation.sh`
