@@ -249,8 +249,7 @@ Choose an option:  "
         mainmenu
         ;;
     2)
-        #disablestopfirewalld
-        DISPLAY_MESSAGE "This feature is deprecated due to the fact that AlmaLinux 8 Non GUI doesn't come with firewalld by default."
+        disablestopfirewalld
         mainmenu
         ;;
     3)
