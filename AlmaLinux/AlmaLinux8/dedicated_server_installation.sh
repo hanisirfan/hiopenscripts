@@ -122,7 +122,7 @@ changesshport () {
     # Checks if port already changed or not
 
     # Checks if user want to cancel port change.
-    if [[ "${PORT,,}" == 'c']] then
+    if [ "${PORT,,}" == 'c'] then
         DISPLAY_MESSAGE "Cancelling SSH port change..."
         mainmenu
     # Checks if port input is not empty and within the range of 0 - 65535.
