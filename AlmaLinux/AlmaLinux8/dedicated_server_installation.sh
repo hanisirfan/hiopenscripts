@@ -113,22 +113,13 @@ disableselinux() {
 changesshport () {
     # Disable SSH Port
     DISPLAY_MESSAGE "Change SSH Port"
-    read -r -p "Port Number (0 - 65535). Enter 'C' To Cancel: " PORT
+    read -r -p "Port Number (0 - 65535): " PORT
 
     sshconfigfile="/etc/ssh/sshd_config"
     sshportconfigstring="#Port 22"
     sshnewportstring="Port ${PORT}"
 
-    # Checks if port already changed or not
-
-    # Checks if user want to cancel port change.
-    if [ "${PORT,,}" == 'c']
-    then
-        DISPLAY_MESSAGE "Cancelling SSH port change..."
-        mainmenu
-    # Checks if port input is not empty and within the range of 0 - 65535.
-    elif [[ -n "$PORT" ]] && [[ "$PORT" -ge 0 ]] && [[ "$PORT" -le 65535 ]]
-    then
+    if [[ -n "$PORT" ]] && [[ "$PORT" -ge 0 ]] && [[ "$PORT" -le 65535 ]] ; then
         # sed -i "s/CONFIG_STRING/NEW_PORT" $CONFIG_FILE
         sed -i "s/$sshportconfigstring/$sshnewportstring/" $sshconfigfile
         DISPLAY_MESSAGE "SSH port changed successfully!"
