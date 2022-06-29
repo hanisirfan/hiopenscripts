@@ -122,11 +122,13 @@ changesshport () {
     # Checks if port already changed or not
 
     # Checks if user want to cancel port change.
-    if [ "${PORT,,}" == 'c'] then
+    if [ "${PORT,,}" == 'c']
+    then
         DISPLAY_MESSAGE "Cancelling SSH port change..."
         mainmenu
     # Checks if port input is not empty and within the range of 0 - 65535.
-    elif [[ -n "$PORT" ]] && [[ "$PORT" -ge 0 ]] && [[ "$PORT" -le 65535 ]] then
+    elif [[ -n "$PORT" ]] && [[ "$PORT" -ge 0 ]] && [[ "$PORT" -le 65535 ]]
+    then
         # sed -i "s/CONFIG_STRING/NEW_PORT" $CONFIG_FILE
         sed -i "s/$sshportconfigstring/$sshnewportstring/" $sshconfigfile
         DISPLAY_MESSAGE "SSH port changed successfully!"
